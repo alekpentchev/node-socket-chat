@@ -5,7 +5,6 @@ html
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.css')
     link(rel='stylesheet', href='css/main.css')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   body
     #chat-app
       #chat.has-text-centered
@@ -21,7 +20,7 @@ html
                 h2.title Chatbox
                 .chat-messages.has-text-left
                   ul#chat-messages
-                form
+                form#form
                   .field.has-addons
                     p.control
                       input(type='text', class='input', value='Chuck Norris', id='name')
@@ -31,16 +30,18 @@ html
                       input(type='submit', class='button is-success', value='Post')
       script.
         const socket = io();
-        $('form').submit(function() {
-          const name = $('#name').val();
-          const message = $('#message').val();
+        document.getElementById('form').addEventListener('submit', function(evt) {
+          evt.preventDefault();
+          const name = document.querySelector('#name').value;
+          const message = document.querySelector('#message').value;
 
           socket.emit('chatter', `${name} : ${message}`);
-          $('#message').val('');
-          return false; 
-        });
+          document.querySelector('#message').value = '';
+        })
 
         socket.on('message', function(message) {
-            console.log('foo')
-          $('#chat-messages').append($('<li>').text(message));
+          const ul = document.querySelector('#chat-messages');
+          const li = document.createElement('li');
+          li.textContent = message;
+          ul.appendChild(li);
         });
