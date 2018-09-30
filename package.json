@@ -1,0 +1,24 @@
+{
+  "name": "node-socket-app",
+  "version": "1.0.0",
+  "description": "Yet another simple node.js and socket.io chat app",
+  "main": "app.js",
+  "scripts": {
+    "test": "null",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "node",
+    "socket",
+    "chat",
+    "js",
+    "javascript"
+  ],
+  "author": "Aleksander Pentchev",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pug": "^2.0.3",
+    "socket.io": "^2.1.1"
+  }
+}
